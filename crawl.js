@@ -30,10 +30,28 @@ function getURLsFromHTML(htmlString, rootURL) {
     return urlArray;
 };
 
-async function crawlPage(baseURL) {
+async function crawlPage(baseURL, currentURL = baseURL, pages = {}) {
+    let fullURL;
+    if (!currentURL.startsWith('/')) {
+        let curObjURL = new URL(currentURL);
+        let baseObjURL = new URL(baseURL);
+        if (curObjURL.hostname !== baseObjURL.hostname) {
+            return pages;
+        }
+        fullURL = curObjURL;
+    } else {
+        fullURL = new URL(currentURL, baseURL);
+    }
+    const curNormURL = normalizeURL(fullURL);
+    if (curNormURL in pages) {
+        pages[curNormURL]++;
+        return pages;
+    }
+    pages[curNormURL] = 1;
+
     let response;
     try {
-        response = await fetch(baseURL, {
+        response = await fetch(fullURL, {
             method: 'GET',
             mode: 'cors',
             headers: {
@@ -53,8 +71,13 @@ async function crawlPage(baseURL) {
         console.log(`response incorrect content type: ${contentType}`);
         return;
     }
+
     const text = await response.text();
-    console.log(text);
+    const links = getURLsFromHTML(text, baseURL);
+    for (const link of links) {
+        crawlPage(baseURL, link, pages);
+    }
+    return pages;
 };
 
 export { normalizeURL, getURLsFromHTML, crawlPage };
