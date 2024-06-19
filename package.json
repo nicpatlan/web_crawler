@@ -23,5 +23,9 @@
   "homepage": "https://github.com/nicpatlan/web_crawler#readme",
   "devDependencies": {
     "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "jsdom": "^24.1.0",
+    "punycode": "^2.3.1"
   }
 }
