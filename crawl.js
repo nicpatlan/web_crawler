@@ -30,4 +30,31 @@ function getURLsFromHTML(htmlString, rootURL) {
     return urlArray;
 };
 
-export { normalizeURL, getURLsFromHTML };
+async function crawlPage(baseURL) {
+    let response;
+    try {
+        response = await fetch(baseURL, {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'text/html'
+            }
+        });
+    } catch (err) {
+        console.log(`fetch error: ${err}`);
+        return;
+    }
+    if (response.status >= 400) {
+        console.log(`response status error: ${response.status}`);
+        return;
+    }
+    const contentType = response.headers.get('Content-Type');
+    if (!contentType || !contentType.includes('text/html')) {
+        console.log(`response incorrect content type: ${contentType}`);
+        return;
+    }
+    const text = await response.text();
+    console.log(text);
+};
+
+export { normalizeURL, getURLsFromHTML, crawlPage };
