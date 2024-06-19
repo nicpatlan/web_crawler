@@ -9,7 +9,7 @@ function normalizeURL(urlString) {
     } else {
         normalURL += pathName
     }
-    return normalURL
+    return normalURL;
 };
 
 function getURLsFromHTML(htmlString, rootURL) {
@@ -27,7 +27,7 @@ function getURLsFromHTML(htmlString, rootURL) {
             }
         }
     }
-    return urlArray
-}
+    return urlArray;
+};
 
 export { normalizeURL, getURLsFromHTML };
