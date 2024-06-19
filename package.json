@@ -1,0 +1,27 @@
+{
+  "name": "web_crawler",
+  "version": "1.0.0",
+  "description": "a web crawler program",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node crawl.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "jest": {
+    "transform": {}
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicpatlan/web_crawler.git"
+  },
+  "author": "Nick Langhorne",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nicpatlan/web_crawler/issues"
+  },
+  "homepage": "https://github.com/nicpatlan/web_crawler#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
