@@ -10,7 +10,7 @@ function normalizeURL(urlString) {
         normalURL += pathName
     }
     return normalURL;
-};
+}
 
 function getURLsFromHTML(htmlString, rootURL) {
     const dom = new JSDOM(htmlString);
@@ -28,7 +28,7 @@ function getURLsFromHTML(htmlString, rootURL) {
         }
     }
     return urlArray;
-};
+}
 
 async function crawlPage(baseURL, currentURL = baseURL, pages = {}) {
     let fullURL;
@@ -78,6 +78,6 @@ async function crawlPage(baseURL, currentURL = baseURL, pages = {}) {
         crawlPage(baseURL, link, pages);
     }
     return pages;
-};
+}
 
 export { normalizeURL, getURLsFromHTML, crawlPage };

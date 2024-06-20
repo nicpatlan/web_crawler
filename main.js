@@ -1,4 +1,5 @@
 import { crawlPage } from "./crawl.js";
+import { printReport } from "./report.js";
 
 async function main() {
     const args = process.argv;
@@ -9,11 +10,8 @@ async function main() {
     } else {
         console.log(`Crawler search starting at ${args[2]}...`);
         const pages = await crawlPage(args[2]);
-        /*for (const key of Object.keys(pages)) {
-            console.log(`url: ${key}, count: ${pages[key]}`);
-        }*/
-        console.log(pages);
+        printReport(pages);
     }
-};
+}
 
 main();
